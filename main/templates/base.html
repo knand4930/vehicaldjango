@@ -1,0 +1,74 @@
+{% load bootstrap5 %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block header %}
+    <title>{% block title %}{% endblock %}</title>
+    {% endblock %}
+
+</head>
+<body>
+    <ul class="nav">
+
+      {% if request.user.is_authenticated %}
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logoutattempt' %}">Log Out</a>
+      </li>
+
+    <br>
+    {% else %}
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'registers' %}">Registration</a>
+        </li>
+        <br>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'logins' %}">Login</a>
+          </li>
+  
+        <br>
+        {% endif %}
+
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'rental' %}">Add Retntal Booking</a>
+        </li>
+
+      <br>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'customerlist' %}">Customer List </a>
+      </li>
+
+    <br>
+
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'rentallist' %}">Rental List </a>
+    </li>
+
+  <br>
+
+
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'vehiclesavailable' %}"> Vehicle Availability</a>
+  </li>
+
+<br>
+
+        <hr>
+<section class="container">
+{%block body %}
+
+
+{% endblock %}
+
+</section>
+</body>
+</html>

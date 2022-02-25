@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load bootstrap5 %}
+
+
+{% block header %}
+<title>{% block title %}Add Rental Booking{% endblock %}</title>
+{% endblock %}
+
+{% block body %}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<br>
+<hr>
+
+<form class="form-group" method="post">
+
+    {% csrf_token %}
+      <br>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Choose Rental Vehicle</label>
+
+
+        <select name="vehicle" required>
+            {% for i in vr %}
+          <option value="{{ i.name }}">{{ i.name }} | {{ i.status }}</option>
+          {% endfor %}
+        </select> 
+      </div>    
+
+      <br>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Activated Contact </label>
+        <input type="text"  name ="mobile" class="form-control" id="exampleInputPassword1" required>
+      </div>
+      <br>
+<br>
+<div class="mb-3">
+  <label for="exampleInputPassword1" class="form-label">Rental Date</label>
+  <input type="date"  name ="rental_date" max="today" id="demo" class="form-control"  required>
+</div>
+<br>
+
+    <br>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Return Date</label>
+      <input type="date"  name ="return_date" max="today" id="dt" class="form-control" required>
+    </div>
+    <br>
+
+    <button type="submit" class="btn btn-primary">Add Rental</button>
+  </form>
+
+
+
+
+
+
+
+
+
+  <script>
+    var todayDate = new Date();
+    var month = todayDate.getMonth() + 1; 
+    var year = todayDate.getUTCFullYear() - 0; 
+    var tdate = todayDate.getDate(); 
+    if(month < 10){
+      month = "0" + month 
+    }
+    if(tdate < 10){
+      tdate = "0" + tdate;
+    }
+    var maxDate = year + "-" + month + "-" + tdate;
+    document.getElementById("demo").setAttribute("min", maxDate);
+    console.log(maxDate);
+  </script>
+
+
+  <script>
+    var todayDate = new Date();
+    var month = todayDate.getMonth() + 1; 
+    var year = todayDate.getUTCFullYear() - 0; 
+    var tdate = todayDate.getDate() + 1; 
+    if(month < 10){
+      month = "0" + month 
+    }
+    if(tdate < 10){
+      tdate = "0" + tdate;
+    }
+    var maxDate = year + "-" + month + "-" + tdate;
+    document.getElementById("dt").setAttribute("min", maxDate);
+    console.log(maxDate);
+  </script>
+
+
+{% endblock %}
